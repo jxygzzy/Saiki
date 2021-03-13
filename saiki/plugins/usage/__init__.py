@@ -26,7 +26,7 @@ async def handle_first_receive(bot: Bot, event: Event, state: T_State):
         "meta": {
             "notification": {
                 "appInfo": {
-                    "appName": "功能列表",
+                    "appName": "功能列表【1】",
                     "appType": "",
                     "appid": "",
                     "iconUrl": f"https://q4.qlogo.cn/headimg_dl?dst_uin={bot.self_id}&spec=640"
@@ -60,6 +60,46 @@ async def handle_first_receive(bot: Bot, event: Event, state: T_State):
                         "title": "",
                         "value": "壁纸 发送【壁纸】"
                     },
+                ],
+                "title": "",
+                "button": [
+                    {
+                        "name": "在群聊中与bot交流请统一加上前缀",
+                        "action": ""
+                    },
+                    {
+                        "name": "目前设有如下前缀：saiki,Saiki,~",
+                        "action": ""
+                    }
+                ],
+                "emphasis_keyword": ""
+            }
+        },
+        "text": "",
+        "sourceAd": ""
+    }
+    await bot.send(event=event,message=MessageSegment.json(json.dumps(contentJson)))
+    contentJson = {
+        "app": "com.tencent.miniapp",
+        "desc": "",
+        "view": "notification",
+        "ver": "0.0.0.1",
+        "prompt": "",
+        "appID": "",
+        "sourceName": "",
+        "actionData": "",
+        "actionData_A": "",
+        "sourceUrl": "",
+        "meta": {
+            "notification": {
+                "appInfo": {
+                    "appName": "功能列表【2】",
+                    "appType": "",
+                    "appid": "",
+                    "iconUrl": f"https://q4.qlogo.cn/headimg_dl?dst_uin={bot.self_id}&spec=640"
+                },
+                "data": [
+
                     {
                         "title": "",
                         "value": "天气 发送【天气 XXX】"
@@ -98,5 +138,4 @@ async def handle_first_receive(bot: Bot, event: Event, state: T_State):
         "text": "",
         "sourceAd": ""
     }
-    face = MessageSegment.face(260)
-    await bot.send(event=event,message=MessageSegment.json(json.dumps(contentJson)))
+    await bot.send(event=event, message=MessageSegment.json(json.dumps(contentJson)))
