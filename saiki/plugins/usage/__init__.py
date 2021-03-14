@@ -1,6 +1,4 @@
 import json
-
-import nonebot
 from nonebot import on_command
 from nonebot.adapters.cqhttp import MessageSegment
 from nonebot.rule import to_me
@@ -119,6 +117,10 @@ async def handle_first_receive(bot: Bot, event: Event, state: T_State):
                     {
                         "title": "",
                         "value": "复读 发送【说/say XXX】"
+                    },
+                    {
+                        "title": "",
+                        "value": "搜图 发送【搜图 XXX】"
                     }
                 ],
                 "title": "",

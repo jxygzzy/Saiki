@@ -1,14 +1,19 @@
-# from nonebot import on_request
-# from nonebot.notice_request import RequestSession
-#
-#
-# @on_request('friend')
-# async def _(session: RequestSession):
-#     await session.bot.set_friend_add_request(flag=session.event.fla, approve=True, self_id=session.event.self_id,
-#                                              remark=session.event.comment)
-#
-#
-# @on_request('group')
-# async def _(session: RequestSession):
-#     await session.bot.set_group_add_request(flag=session.event.fla, approve=True, self_id=session.event.self_id,
-#                                             remark=session.event.comment)
+from nonebot import on_request
+from nonebot.adapters.cqhttp import Event, FriendRequestEvent, GroupRequestEvent
+from nonebot.typing import T_State
+from nonebot.adapters import Bot
+
+friend_req = on_request()
+
+
+@friend_req.handle()
+async def friend_req(bot: Bot, event: FriendRequestEvent, state: T_State):
+    await bot.call_api('set_friend_add_request', flag=event.flag, approve=True)
+
+
+group_req = on_request()
+
+
+@group_req.handle()
+async def group_req(bot: Bot, event: GroupRequestEvent, state: T_State):
+    await bot.call_api('set_group_add_request', flag=event.flag, approve=True)

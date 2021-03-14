@@ -1,11 +1,10 @@
 import httpx
 
-UserAgent = "box-s-ville.Saiki"
-apikey = '0961535560170e964e4689'
+from config import loliconApikey
 
 
 async def get_setu() -> []:
-    url = f"https://api.lolicon.app/setu?apikey={apikey}&r18=2&size1200=true"
+    url = f"https://api.lolicon.app/setu?apikey={loliconApikey}&r18=2&size1200=true"
     async with httpx.AsyncClient() as client:
         resp = await client.get(url)
         code = resp.json()

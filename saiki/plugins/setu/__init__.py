@@ -58,4 +58,13 @@ async def handle_first_receive(bot: Bot, event: Event, state: T_State):
         "sourceAd": ""
     }
     await bot.send(event=event, message=MessageSegment.json(data=json.dumps(setuJson)))
-    await bot.send(event=event, message=MessageSegment.image(file=data['url']))
+    ImgCq = [
+        {
+            "type": "image",
+            "data": {
+                "file": data['url'],
+                "type": "flash"
+            }
+        }
+    ]
+    await bot.send(event=event, message=ImgCq)
