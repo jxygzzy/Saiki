@@ -108,7 +108,7 @@ async def handle_first_receive(bot: Bot, event: Event, state: T_State):
                     },
                     {
                         "title": "",
-                        "value": "知乎热搜 发送【知乎】"
+                        "value": "热搜 发送【知乎/抖音/微博】"
                     },
                     {
                         "title": "",
@@ -121,6 +121,10 @@ async def handle_first_receive(bot: Bot, event: Event, state: T_State):
                     {
                         "title": "",
                         "value": "搜图 发送【搜图 XXX】"
+                    },
+                    {
+                        "title": "",
+                        "value": "其他请求触发事件"
                     }
                 ],
                 "title": "",
