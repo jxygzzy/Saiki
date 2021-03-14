@@ -45,6 +45,7 @@ async def handle_first_receive(bot: Bot, event: LuckyKingNotifyEvent, state: T_S
         }
 
     ]
+    await bot.send(event=event, message=rely)
 
 
 poke = on_notice(rule=to_me())
