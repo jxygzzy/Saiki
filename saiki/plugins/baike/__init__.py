@@ -10,9 +10,9 @@ baike = on_command("百科", rule=to_me(), priority=5)
 
 @baike.handle()
 async def handle_first_receive(bot: Bot, event: Event, state: T_State):
-    args = str(event.get_message()).strip().split()  # 首次发送命令时跟随的参数，例：/天气 上海，则args为上海
+    args = str(event.get_message()).strip() # 首次发送命令时跟随的参数，例：/天气 上海，则args为上海
     if args:
-        state["words"] = args[0]  # 如果用户发送了参数则直接赋值
+        state["words"] = args  # 如果用户发送了参数则直接赋值
 
 
 @baike.got("words", prompt="你想查询什么词条呢？")

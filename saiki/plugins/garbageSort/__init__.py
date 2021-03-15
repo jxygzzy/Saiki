@@ -12,9 +12,9 @@ garbage = on_command("垃圾分类", rule=to_me(), priority=5)
 
 @garbage.handle()
 async def handle_first_receive(bot: Bot, event: Event, state: T_State):
-    args = str(event.get_message()).strip().split()
+    args = str(event.get_message()).strip()
     if args:
-        state["garbage"] = args[0]
+        state["garbage"] = args
 
 
 @garbage.got("garbage", prompt="请问是什么物品呢？")
