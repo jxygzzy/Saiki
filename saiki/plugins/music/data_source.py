@@ -135,7 +135,7 @@ class dataProcess():
             songItem += songInfo["songArtists"]
             songAlbum += " 专辑："
             songAlbum += songInfo["songAlbum"]
-            songInfoMessage.append({"title": numId,
+            songInfoMessage.append({"title": f"    NO.{numId}",
                                     "value": songItem})
             numId += 1
         return songInfoMessage
