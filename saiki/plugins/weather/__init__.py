@@ -40,7 +40,7 @@ async def handle_city(bot: Bot, event: Event, state: T_State):
                         "appName": f"{data['cityname']}天气",
                         "appType": "",
                         "appid": "",
-                        "iconUrl": "https://www.easyicon.net//api/resizeApi.php?id=1142180&size=128"
+                        "iconUrl": "https://gitee.com/jxygzzy/filebad/raw/master/icon/20210614-160947-0334.png"
                     },
                     "data": [
                         {

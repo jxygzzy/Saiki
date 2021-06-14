@@ -1,6 +1,3 @@
-import json
-from xml.dom import minidom
-
 from nonebot import on_command
 from nonebot.rule import to_me
 from nonebot.typing import T_State

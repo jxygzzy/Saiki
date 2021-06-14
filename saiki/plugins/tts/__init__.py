@@ -3,7 +3,7 @@ from nonebot.rule import to_me
 from nonebot.typing import T_State
 from nonebot.adapters import Bot, Event
 
-tts = on_command(cmd="tts", aliases={"说", "say"}, rule=to_me(), priority=5)
+tts = on_command(cmd="tts", aliases={"说", "say", "复读"}, rule=to_me(), priority=5)
 
 
 @tts.handle()

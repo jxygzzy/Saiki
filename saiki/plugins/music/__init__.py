@@ -11,7 +11,7 @@ from nonebot import on_command
 dataget = dataGet()
 
 songpicker = on_command(
-    "点歌", permission=Permission(), priority=5)
+    cmd="点歌", aliases={"来首歌", "我想听"}, permission=Permission(), priority=5)
 
 
 @songpicker.handle()

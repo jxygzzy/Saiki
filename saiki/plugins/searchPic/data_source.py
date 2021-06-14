@@ -7,7 +7,7 @@ async def search_pic(keywords: str) -> []:
     async with httpx.AsyncClient() as client:
         resp = await client.get(url)
         code = resp.json()
-        if code['data'] == []:
+        if not code['data']:
             return "404"
         else:
             data = code['data'][0]
