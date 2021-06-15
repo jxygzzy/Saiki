@@ -1,1 +1,2 @@
 loliconApikey = '0961535560170e964e4689'
+taixingApiKey='f239c35970496771b79f78a39ad569ab'

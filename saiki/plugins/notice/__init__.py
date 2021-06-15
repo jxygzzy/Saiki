@@ -1,6 +1,8 @@
+import random
+
 from nonebot import on_notice
 from nonebot.adapters.cqhttp import Bot, Event, GroupDecreaseNoticeEvent, GroupIncreaseNoticeEvent, \
-    FriendAddNoticeEvent, PokeNotifyEvent, LuckyKingNotifyEvent, HonorNotifyEvent
+    FriendAddNoticeEvent, PokeNotifyEvent, LuckyKingNotifyEvent, HonorNotifyEvent, Message
 from nonebot.rule import to_me
 from nonebot.typing import T_State
 
@@ -12,41 +14,7 @@ LuckyKing = on_notice()
 
 @LuckyKing.handle()
 async def handle_first_receive(bot: Bot, event: LuckyKingNotifyEvent, state: T_State):
-    rely = [
-        {
-            "type": "at",
-            "data": {
-                "qq": f"{event.target_id}"
-            }
-        },
-        {
-            "type": "text",
-            "data": {
-                "text": "是运气王"
-            }
-        },
-        {
-            "type": "image",
-            "data": {
-                "file": f"https://q4.qlogo.cn/headimg_dl?dst_uin={event.target_id}&spec=640"
-            }
-        },
-        {
-            "type": "text",
-            "data": {
-                "text": "红包来自"
-            }
-        },
-        {
-            {
-                "type": "at",
-                "data": {
-                    "qq": f"{event.user_id}"
-                }
-            }
-        }
-
-    ]
+    rely = f'[CQ:at,qq={event.target_id}]是运气王!\n\t来自{event.user_id}的红包'
     await bot.send(event=event, message=rely)
 
 
@@ -56,13 +24,14 @@ poke = on_notice(rule=to_me())
 
 @poke.handle()
 async def handle_first_receive(bot: Bot, event: PokeNotifyEvent, state: T_State):
-    rely = [{
-        "type": "poke",
-        "data": {
-            "qq": event.get_user_id()
-        }
-    }]
-    await bot.send(event=event, message=rely)
+    expr_poke = [
+        f'[CQ:poke,qq={event.get_user_id()}]',
+        '那里不可以！(>﹏<)',
+        '再戳就要坏了！',
+        '我在！',
+        '干嘛！'
+    ]
+    await bot.send(event=event, message=Message(random.choice(expr_poke)))
 
 
 GroupDecrease = on_notice()
@@ -71,36 +40,11 @@ GroupDecrease = on_notice()
 
 @GroupDecrease.handle()
 async def handle_first_receive(bot: Bot, event: GroupDecreaseNoticeEvent, state: T_State):
+    nick_name = await get_nickname(event.user_id)
     if event.user_id == event.operator_id:
-        rely = [
-            {
-                "type": "text",
-                "data": {
-                    "text": f"【{get_nickname(event.user_id)}】主动离开了群聊\n"
-                }
-            },
-            {
-                "type": "image",
-                "data": {
-                    "file": f"https://q4.qlogo.cn/headimg_dl?dst_uin={event.user_id}&spec=640"
-                }
-            }
-        ]
+        rely = f'【{nick_name}】主动离开了群聊\n[CQ:image,file=https://q4.qlogo.cn/headimg_dl?dst_uin={event.user_id}&spec=640]'
     else:
-        rely = [
-            {
-                "type": "text",
-                "data": {
-                    "text": f"【{get_nickname(event.user_id)}】被踢出群聊\n"
-                }
-            },
-            {
-                "type": "image",
-                "data": {
-                    "file": f"https://q4.qlogo.cn/headimg_dl?dst_uin={event.user_id}&spec=640"
-                }
-            }
-        ]
+        rely = f'【{nick_name}】被踢出群聊\n[CQ:image,file=https://q4.qlogo.cn/headimg_dl?dst_uin={event.user_id}&spec=640]'
     await bot.send(event=event, message=rely)
 
 
@@ -110,33 +54,8 @@ GroupIncrease = on_notice()
 
 @GroupIncrease.handle()
 async def handle_first_receive(bot: Bot, event: GroupIncreaseNoticeEvent, state: T_State):
-    rely = [
-        {
-            "type": "text",
-            "data": {
-                "text": "欢迎"
-            }
-        },
-        {
-            "type": "at",
-            "data": {
-                "qq": f"{event.user_id}"
-            }
-        },
-        {
-            "type": "text",
-            "data": {
-                "text": "进群"
-            }
-        },
-        {
-            "type": "image",
-            "data": {
-                "file": f"https://q4.qlogo.cn/headimg_dl?dst_uin={event.user_id}&spec=640"
-            }
-        }
-    ]
-    await bot.send(event=event, message=rely)
+    groupIncrease = f'欢迎[CQ:at,qq={event.user_id}]进群[CQ:image,file=https://q4.qlogo.cn/headimg_dl?dst_uin={event.user_id}&spec=640]'
+    await bot.send(event=event, message=Message(groupIncrease))
 
 
 FriendAdd = on_notice()
@@ -145,15 +64,7 @@ FriendAdd = on_notice()
 
 @FriendAdd.handle()
 async def handle_first_receive(bot: Bot, event: FriendAddNoticeEvent, state: T_State):
-    rely = [
-        {
-            "type": "text",
-            "data": {
-                "text": "你好!请回复【功能】查看可进行的操作"
-            }
-        }
-    ]
-    await bot.send(event=event, message=rely)
+    await bot.send(event=event, message=Message('你好!请回复【功能】查看可进行的操作'))
 
 
 Honor = on_notice()
@@ -166,12 +77,9 @@ honor_type	talkative:龙王 performer:群聊之火 emotion:快乐源泉
 @Honor.handle()
 async def handle_first_receive(bot: Bot, event: HonorNotifyEvent, state: T_State):
     if event.honor_type == 'talkative':
-        rely = [
-            {
-                "type": "text",
-                "data": {
-                    "text": f"恭喜{get_nickname(event.user_id)}成为今日龙王，赶紧给大家表演一个喷水吧"
-                }
-            }
+        nick_name = await get_nickname(event.user_id)
+        expr_talkative = [
+            f"恭喜{nick_name}成为今日龙王，赶紧给大家表演一个喷水吧。",
+            f'{nick_name}成为今日龙王，大家赶紧欺负ta！'
         ]
-        await bot.send(event=event, message=rely)
+        await bot.send(event=event, message=random.choice(expr_talkative))

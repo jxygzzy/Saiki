@@ -10,5 +10,4 @@ usage = on_command(cmd="功能", aliases={"帮助", "功能", "help"}, rule=to_m
 @usage.handle()
 async def handle_first_receive(bot: Bot, event: Event, state: T_State):
     await bot.send(event=event, message=Message(
-        "[CQ:share,url=https://gitee.com/jxygzzy/saiki-bot-function-description"
-        ",title=Saiki-BOT-支持功能列表,content=QQ机器人Saiki的功能说明]"))
+        "[CQ:image,file=https://gitee.com/jxygzzy/filebad/raw/master/svg/20210615-205222-0699.png]"))
